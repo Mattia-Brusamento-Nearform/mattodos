@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mattodos — Design Direction Mockups</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF9;
+      --surface: #FFFFFF;
+      --text-primary: #1C1917;
+      --text-secondary: #78716C;
+      --text-muted: #A8A29E;
+      --border: #E7E5E4;
+      --accent: #475569;
+      --success: #16A34A;
+      --error: #DC2626;
+      --error-bg: #FEF2F2;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: #F1F0EE;
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 32px 16px;
+    }
+
+    .page-header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Direction selector tabs */
+    .direction-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto 32px;
+    }
+    .tab {
+      padding: 10px 20px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .tab:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+    .tab.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Mockup container */
+    .mockup-area {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .direction {
+      display: none;
+    }
+    .direction.active {
+      display: block;
+    }
+    .direction-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 24px;
+    }
+    .direction-info h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .direction-info .subtitle {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .direction-traits {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .trait {
+      padding: 4px 10px;
+      background: #F5F5F4;
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Shared mockup frame */
+    .mockup-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .browser-bar {
+      background: #E7E5E4;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #D6D3D1;
+    }
+    .browser-url {
+      flex: 1;
+      background: white;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+
+    /* =============================
+       DIRECTION 1: Clean Sheet
+       ============================= */
+    .d1-app {
+      background: #FFFFFF;
+      min-height: 500px;
+      padding: 48px 0;
+    }
+    .d1-content {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .d1-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+    .d1-input-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .d1-input-row:focus-within {
+      border-bottom-color: var(--accent);
+    }
+    .d1-input-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      font-family: var(--font);
+      color: var(--text-primary);
+      background: transparent;
+    }
+    .d1-input-row input::placeholder { color: var(--text-muted); }
+    .d1-todo-list {
+      list-style: none;
+    }
+    .d1-todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #F5F5F4;
+    }
+    .d1-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .d1-check:hover {
+      border-color: var(--accent);
+    }
+    .d1-check.done {
+      border-color: var(--success);
+      background: var(--success);
+    }
+    .d1-check.done::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .d1-todo-text {
+      flex: 1;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+    .d1-todo-text.done {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+    .d1-delete {
+      opacity: 0;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.15s;
+      padding: 4px;
+    }
+    .d1-todo-item:hover .d1-delete {
+      opacity: 1;
+    }
+    .d1-delete:hover {
+      color: var(--error);
+    }
+    .d1-timestamp {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* =============================
+       DIRECTION 2: Soft Container
+       ============================= */
+    .d2-app {
+      background: var(--bg);
+      min-height: 500px;
+      padding: 48px 0;
+    }
+    .d2-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .d2-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .d2-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .d2-input-area {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .d2-input-area input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: var(--font);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .d2-input-area input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+    }
+    .d2-input-area input::placeholder { color: var(--text-muted); }
+    .d2-todo-list {
+      list-style: none;
+    }
+    .d2-todo-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: default;
+    }
+    .d2-todo-item:last-child {
+      border-bottom: none;
+    }
+    .d2-todo-item:hover {
+      background: #FAFAF9;
+    }
+    .d2-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .d2-check:hover {
+      border-color: var(--accent);
+    }
+    .d2-check.done {
+      border-color: var(--success);
+      background: var(--success);
+    }
+    .d2-check.done::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .d2-todo-text {
+      flex: 1;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+    .d2-todo-text.done {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    .d2-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .d2-delete {
+      opacity: 0;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+    .d2-todo-item:hover .d2-delete {
+      opacity: 1;
+    }
+    .d2-delete:hover {
+      color: var(--error);
+      background: var(--error-bg);
+    }
+    .d2-count {
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* =============================
+       DIRECTION 3: Dense & Efficient
+       ============================= */
+    .d3-app {
+      background: #FFFFFF;
+      min-height: 500px;
+      padding: 32px 0;
+    }
+    .d3-content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .d3-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+    .d3-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .d3-stats {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .d3-input-row {
+      margin-bottom: 16px;
+    }
+    .d3-input-row input {
+      width: 100%;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      color: var(--text-primary);
+      outline: none;
+      background: #FAFAF9;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+    .d3-input-row input:focus {
+      border-color: var(--accent);
+      background: white;
+    }
+    .d3-input-row input::placeholder { color: var(--text-muted); font-family: var(--font); }
+    .d3-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 4px;
+    }
+    .d3-todo-list {
+      list-style: none;
+    }
+    .d3-todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px;
+      border-bottom: 1px solid #F5F5F4;
+      font-size: 14px;
+    }
+    .d3-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1.5px solid #D6D3D1;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .d3-check.done {
+      border-color: var(--success);
+      background: var(--success);
+    }
+    .d3-check.done::after {
+      content: '✓';
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .d3-todo-text {
+      flex: 1;
+      color: var(--text-primary);
+    }
+    .d3-todo-text.done {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .d3-meta {
+      font-size: 11px;
+      color: #C4C0BC;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .d3-delete {
+      opacity: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 2px 4px;
+      transition: all 0.1s;
+    }
+    .d3-todo-item:hover .d3-delete { opacity: 0.6; }
+    .d3-delete:hover { opacity: 1 !important; color: var(--error); }
+
+    /* =============================
+       DIRECTION 4: Warm & Personal
+       ============================= */
+    .d4-app {
+      background: var(--bg);
+      min-height: 500px;
+      padding: 48px 0;
+    }
+    .d4-content {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .d4-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .d4-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .d4-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06), 0 0 0 1px rgba(28, 25, 23, 0.03);
+      overflow: hidden;
+    }
+    .d4-input-area {
+      padding: 20px;
+    }
+    .d4-input-area input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 16px;
+      font-family: var(--font);
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.25s;
+    }
+    .d4-input-area input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(71, 85, 105, 0.08);
+    }
+    .d4-input-area input::placeholder { color: var(--text-muted); }
+    .d4-todo-list {
+      list-style: none;
+    }
+    .d4-todo-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border-top: 1px solid #F5F5F4;
+      transition: background 0.2s;
+    }
+    .d4-todo-item:hover {
+      background: #FEFDFB;
+    }
+    .d4-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #D6D3D1;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .d4-check:hover {
+      border-color: var(--success);
+    }
+    .d4-check.done {
+      border-color: var(--success);
+      background: var(--success);
+      transform: scale(1);
+    }
+    .d4-check.done::after {
+      content: '✓';
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      animation: checkPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes checkPop {
+      0% { transform: scale(0); }
+      60% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .d4-todo-text {
+      flex: 1;
+      font-size: 16px;
+      color: var(--text-primary);
+      transition: all 0.3s;
+    }
+    .d4-todo-text.done {
+      text-decoration: line-through;
+      opacity: 0.4;
+    }
+    .d4-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .d4-delete {
+      opacity: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+    .d4-todo-item:hover .d4-delete { opacity: 1; }
+    .d4-delete:hover {
+      color: var(--error);
+      background: var(--error-bg);
+    }
+    .d4-footer {
+      padding: 14px 20px;
+      border-top: 1px solid #F5F5F4;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Comparison view */
+    .comparison-grid {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .comparison-grid.active {
+      display: grid;
+    }
+    .comparison-grid .mockup-frame {
+      transform: scale(0.98);
+    }
+    @media (max-width: 900px) {
+      .comparison-grid.active {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-header">
+    <h1>mattodos — Design Directions</h1>
+    <p>Four visual approaches for the same interaction model. Each direction applies our Stone palette, system fonts, and centered column layout differently. Click to explore.</p>
+  </div>
+
+  <div class="direction-tabs">
+    <button class="tab active" onclick="showDirection(1)">1 — Clean Sheet</button>
+    <button class="tab" onclick="showDirection(2)">2 — Soft Container</button>
+    <button class="tab" onclick="showDirection(3)">3 — Dense & Efficient</button>
+    <button class="tab" onclick="showDirection(4)">4 — Warm & Personal</button>
+    <button class="tab" onclick="showComparison()" id="compare-tab">Compare All</button>
+  </div>
+
+  <div class="mockup-area">
+
+    <!-- DIRECTION 1: Clean Sheet -->
+    <div class="direction active" id="d1">
+      <div class="direction-meta">
+        <div class="direction-info">
+          <h2>Direction 1: Clean Sheet</h2>
+          <p class="subtitle">The minimalist extreme — content floats in open space.</p>
+          <div class="direction-traits">
+            <span class="trait">Ultra-light</span>
+            <span class="trait">No container</span>
+            <span class="trait">Maximum whitespace</span>
+            <span class="trait">Paper-like</span>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-frame">
+        <div class="browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">localhost:5173</span>
+        </div>
+        <div class="d1-app">
+          <div class="d1-content">
+            <h1 class="d1-title">mattodos</h1>
+            <div class="d1-input-row">
+              <input type="text" placeholder="What needs to be done?" disabled>
+            </div>
+            <ul class="d1-todo-list">
+              <li class="d1-todo-item">
+                <span class="d1-check"></span>
+                <span class="d1-todo-text">Review PR for auth module</span>
+                <span class="d1-timestamp">9:14 AM</span>
+                <span class="d1-delete">×</span>
+              </li>
+              <li class="d1-todo-item">
+                <span class="d1-check"></span>
+                <span class="d1-todo-text">Update API docs</span>
+                <span class="d1-timestamp">9:15 AM</span>
+                <span class="d1-delete">×</span>
+              </li>
+              <li class="d1-todo-item">
+                <span class="d1-check done"></span>
+                <span class="d1-todo-text done">Fix flaky test in CI</span>
+                <span class="d1-timestamp">Yesterday</span>
+                <span class="d1-delete">×</span>
+              </li>
+              <li class="d1-todo-item">
+                <span class="d1-check done"></span>
+                <span class="d1-todo-text done">Set up Docker compose</span>
+                <span class="d1-timestamp">Yesterday</span>
+                <span class="d1-delete">×</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIRECTION 2: Soft Container -->
+    <div class="direction" id="d2">
+      <div class="direction-meta">
+        <div class="direction-info">
+          <h2>Direction 2: Soft Container</h2>
+          <p class="subtitle">A white card on a warm surface — the notepad on a desk.</p>
+          <div class="direction-traits">
+            <span class="trait">Card container</span>
+            <span class="trait">Subtle shadow</span>
+            <span class="trait">Row hover states</span>
+            <span class="trait">Grounded</span>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-frame">
+        <div class="browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">localhost:5173</span>
+        </div>
+        <div class="d2-app">
+          <div class="d2-content">
+            <h1 class="d2-title">mattodos</h1>
+            <div class="d2-card">
+              <div class="d2-input-area">
+                <input type="text" placeholder="What needs to be done?" disabled>
+              </div>
+              <ul class="d2-todo-list">
+                <li class="d2-todo-item">
+                  <span class="d2-check"></span>
+                  <span class="d2-todo-text">Review PR for auth module</span>
+                  <span class="d2-meta">9:14 AM</span>
+                  <span class="d2-delete">×</span>
+                </li>
+                <li class="d2-todo-item">
+                  <span class="d2-check"></span>
+                  <span class="d2-todo-text">Update API docs</span>
+                  <span class="d2-meta">9:15 AM</span>
+                  <span class="d2-delete">×</span>
+                </li>
+                <li class="d2-todo-item">
+                  <span class="d2-check done"></span>
+                  <span class="d2-todo-text done">Fix flaky test in CI</span>
+                  <span class="d2-meta">Yesterday</span>
+                  <span class="d2-delete">×</span>
+                </li>
+                <li class="d2-todo-item">
+                  <span class="d2-check done"></span>
+                  <span class="d2-todo-text done">Set up Docker compose</span>
+                  <span class="d2-meta">Yesterday</span>
+                  <span class="d2-delete">×</span>
+                </li>
+              </ul>
+              <div class="d2-count">4 items · 2 remaining</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIRECTION 3: Dense & Efficient -->
+    <div class="direction" id="d3">
+      <div class="direction-meta">
+        <div class="direction-info">
+          <h2>Direction 3: Dense & Efficient</h2>
+          <p class="subtitle">Compact, scannable, power-user optimized. Inspired by Google Finance.</p>
+          <div class="direction-traits">
+            <span class="trait">Compact rows</span>
+            <span class="trait">Data-dense</span>
+            <span class="trait">Mono input</span>
+            <span class="trait">Scannable</span>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-frame">
+        <div class="browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">localhost:5173</span>
+        </div>
+        <div class="d3-app">
+          <div class="d3-content">
+            <div class="d3-header">
+              <h1 class="d3-title">mattodos</h1>
+              <span class="d3-stats">2 of 4 remaining</span>
+            </div>
+            <div class="d3-input-row">
+              <input type="text" placeholder="Add a todo…" disabled>
+            </div>
+            <div class="d3-divider"></div>
+            <ul class="d3-todo-list">
+              <li class="d3-todo-item">
+                <span class="d3-check"></span>
+                <span class="d3-todo-text">Review PR for auth module</span>
+                <span class="d3-meta">09:14</span>
+                <span class="d3-delete">×</span>
+              </li>
+              <li class="d3-todo-item">
+                <span class="d3-check"></span>
+                <span class="d3-todo-text">Update API docs</span>
+                <span class="d3-meta">09:15</span>
+                <span class="d3-delete">×</span>
+              </li>
+              <li class="d3-todo-item">
+                <span class="d3-check done"></span>
+                <span class="d3-todo-text done">Fix flaky test in CI</span>
+                <span class="d3-meta">Tue</span>
+                <span class="d3-delete">×</span>
+              </li>
+              <li class="d3-todo-item">
+                <span class="d3-check done"></span>
+                <span class="d3-todo-text done">Set up Docker compose</span>
+                <span class="d3-meta">Tue</span>
+                <span class="d3-delete">×</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIRECTION 4: Warm & Personal -->
+    <div class="direction" id="d4">
+      <div class="direction-meta">
+        <div class="direction-info">
+          <h2>Direction 4: Warm & Personal</h2>
+          <p class="subtitle">Generous radii, animated feedback, conversational. Inspired by Tinder's warmth.</p>
+          <div class="direction-traits">
+            <span class="trait">Rounded corners</span>
+            <span class="trait">Animated checkbox</span>
+            <span class="trait">Conversational</span>
+            <span class="trait">Generous</span>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-frame">
+        <div class="browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">localhost:5173</span>
+        </div>
+        <div class="d4-app">
+          <div class="d4-content">
+            <h1 class="d4-title">mattodos</h1>
+            <p class="d4-subtitle">Your tasks, your pace.</p>
+            <div class="d4-card">
+              <div class="d4-input-area">
+                <input type="text" placeholder="What's on your mind?" disabled>
+              </div>
+              <ul class="d4-todo-list">
+                <li class="d4-todo-item">
+                  <span class="d4-check" onclick="this.classList.toggle('done'); this.nextElementSibling.classList.toggle('done')"></span>
+                  <span class="d4-todo-text">Review PR for auth module</span>
+                  <span class="d4-meta">9:14 AM</span>
+                  <span class="d4-delete">×</span>
+                </li>
+                <li class="d4-todo-item">
+                  <span class="d4-check" onclick="this.classList.toggle('done'); this.nextElementSibling.classList.toggle('done')"></span>
+                  <span class="d4-todo-text">Update API docs</span>
+                  <span class="d4-meta">9:15 AM</span>
+                  <span class="d4-delete">×</span>
+                </li>
+                <li class="d4-todo-item">
+                  <span class="d4-check done"></span>
+                  <span class="d4-todo-text done">Fix flaky test in CI</span>
+                  <span class="d4-meta">Yesterday</span>
+                  <span class="d4-delete">×</span>
+                </li>
+                <li class="d4-todo-item">
+                  <span class="d4-check done"></span>
+                  <span class="d4-todo-text done">Set up Docker compose</span>
+                  <span class="d4-meta">Yesterday</span>
+                  <span class="d4-delete">×</span>
+                </li>
+              </ul>
+              <div class="d4-footer">
+                <span>2 remaining</span>
+                <span>4 total</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Grid -->
+  <div class="comparison-grid" id="comparison">
+    <!-- Filled by JS -->
+  </div>
+
+  <script>
+    function showDirection(n) {
+      document.querySelectorAll('.direction').forEach(d => d.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('d' + n).classList.add('active');
+      document.querySelectorAll('.tab')[n - 1].classList.add('active');
+      document.querySelector('.mockup-area').style.display = 'block';
+      document.getElementById('comparison').classList.remove('active');
+    }
+
+    function showComparison() {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('compare-tab').classList.add('active');
+      document.querySelector('.mockup-area').style.display = 'none';
+
+      const grid = document.getElementById('comparison');
+      grid.innerHTML = '';
+      for (let i = 1; i <= 4; i++) {
+        const dir = document.getElementById('d' + i);
+        const clone = dir.cloneNode(true);
+        clone.classList.add('active');
+        clone.style.display = 'block';
+        grid.appendChild(clone);
+      }
+      grid.classList.add('active');
+    }
+
+    // Make Direction 4 checkboxes interactive
+    document.querySelectorAll('.d4-check:not(.done)').forEach(check => {
+      check.addEventListener('click', function() {
+        this.classList.toggle('done');
+        this.nextElementSibling.classList.toggle('done');
+      });
+    });
+  </script>
+</body>
+</html>
