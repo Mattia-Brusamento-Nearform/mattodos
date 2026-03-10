@@ -3,6 +3,7 @@
 @theme {
   --animate-fade-in: fade-in 200ms ease-out;
   --animate-fade-out: fade-out 200ms ease-out;
+  --animate-checkbox-pop: checkbox-pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes fade-in {
@@ -22,5 +23,17 @@
   }
   to {
     opacity: 0;
+  }
+}
+
+@keyframes checkbox-pop {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }

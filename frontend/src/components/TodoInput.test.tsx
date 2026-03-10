@@ -72,4 +72,24 @@ describe('TodoInput', () => {
       expect(input.value).toBe('Failed todo');
     });
   });
+
+  it('shows "Todo limit reached" placeholder when disabled', () => {
+    const mockSubmit = vi.fn();
+    render(<TodoInput onSubmit={mockSubmit} disabled={true} />);
+    expect(screen.getByPlaceholderText("Todo limit reached")).toBeInTheDocument();
+  });
+
+  it('input is disabled when disabled=true', () => {
+    const mockSubmit = vi.fn();
+    render(<TodoInput onSubmit={mockSubmit} disabled={true} />);
+    const input = screen.getByPlaceholderText("Todo limit reached") as HTMLInputElement;
+    expect(input).toBeDisabled();
+  });
+
+  it('applies disabled styles when disabled=true', () => {
+    const mockSubmit = vi.fn();
+    render(<TodoInput onSubmit={mockSubmit} disabled={true} />);
+    const input = screen.getByPlaceholderText("Todo limit reached") as HTMLInputElement;
+    expect(input).toHaveClass('disabled:opacity-50', 'disabled:cursor-not-allowed');
+  });
 });

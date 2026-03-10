@@ -40,7 +40,7 @@ export function TodoInput({ onSubmit, restoredText, disabled }: TodoInputProps) 
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="What's on your mind?"
+        placeholder={disabled ? "Todo limit reached" : "What's on your mind?"}
         disabled={disabled}
         className="w-full p-4 text-stone-900 placeholder:text-stone-400 bg-transparent
                    focus:border-slate-600 focus:ring-4 focus:ring-slate-600/8 focus:outline-none

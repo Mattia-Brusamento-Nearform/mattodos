@@ -50,11 +50,11 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Complete, Delete, and Manage Todos
-  epic-2: backlog
-  2-1-toggle-todo-completion-with-optimistic-ui: backlog
-  2-2-delete-todo-with-confirmation-dialog: backlog
-  2-3-inline-error-display-and-auto-dismiss: backlog
-  2-4-todo-limit-enforcement: backlog
+  epic-2: in-progress
+  2-1-toggle-todo-completion-with-optimistic-ui: ready-for-dev
+  2-2-delete-todo-with-confirmation-dialog: ready-for-dev
+  2-3-inline-error-display-and-auto-dismiss: ready-for-dev
+  2-4-todo-limit-enforcement: ready-for-dev
   epic-2-retrospective: optional
 
   # Epic 3: Accessibility, Responsive Design, and Production Readiness

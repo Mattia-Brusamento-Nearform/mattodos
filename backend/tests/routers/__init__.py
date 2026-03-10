@@ -76,3 +76,98 @@ async def test_create_todo_limit(client: AsyncClient):
     assert response.status_code == 400
     data = response.json()
     assert "limit" in data["detail"]["detail"].lower()
+
+
+@pytest.mark.asyncio
+async def test_toggle_todo_complete(client: AsyncClient):
+    create_resp = await client.post("/api/todos", json={"description": "Buy milk"})
+    todo_id = create_resp.json()["id"]
+    
+    response = await client.patch(f"/api/todos/{todo_id}", json={"completed": True})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["completed"] is True
+    assert data["description"] == "Buy milk"
+
+
+@pytest.mark.asyncio
+async def test_toggle_todo_incomplete(client: AsyncClient):
+    create_resp = await client.post("/api/todos", json={"description": "Buy milk"})
+    todo_id = create_resp.json()["id"]
+    
+    # Toggle to complete
+    await client.patch(f"/api/todos/{todo_id}", json={"completed": True})
+    
+    # Toggle back to incomplete
+    response = await client.patch(f"/api/todos/{todo_id}", json={"completed": False})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["completed"] is False
+
+
+@pytest.mark.asyncio
+async def test_toggle_todo_not_found(client: AsyncClient):
+    from uuid import uuid4
+    
+    response = await client.patch(f"/api/todos/{uuid4()}", json={"completed": True})
+    assert response.status_code == 404
+    data = response.json()
+    assert data["detail"]["code"] == "NOT_FOUND"
+
+
+@pytest.mark.asyncio
+async def test_toggle_updates_timestamp(client: AsyncClient):
+    create_resp = await client.post("/api/todos", json={"description": "Buy milk"})
+    todo_id = create_resp.json()["id"]
+    created_at = create_resp.json()["updatedAt"]
+    
+    # Wait a moment and update
+    import asyncio
+    await asyncio.sleep(0.1)
+    
+    response = await client.patch(f"/api/todos/{todo_id}", json={"completed": True})
+    updated_at = response.json()["updatedAt"]
+    
+    assert updated_at != created_at
+
+
+@pytest.mark.asyncio
+async def test_delete_todo(client: AsyncClient):
+    create_resp = await client.post("/api/todos", json={"description": "Buy milk"})
+    todo_id = create_resp.json()["id"]
+    
+    response = await client.delete(f"/api/todos/{todo_id}")
+    assert response.status_code == 204
+    assert response.content == b""
+    
+    # Verify todo is gone
+    get_resp = await client.get("/api/todos")
+    assert get_resp.status_code == 200
+    assert len(get_resp.json()) == 0
+
+
+@pytest.mark.asyncio
+async def test_delete_todo_not_found(client: AsyncClient):
+    from uuid import uuid4
+    
+    response = await client.delete(f"/api/todos/{uuid4()}")
+    assert response.status_code == 404
+    data = response.json()
+    assert data["detail"]["code"] == "NOT_FOUND"
+
+
+@pytest.mark.asyncio
+async def test_delete_todo_decrements_count(client: AsyncClient):
+    # Create 2 todos
+    resp1 = await client.post("/api/todos", json={"description": "Todo 1"})
+    resp2 = await client.post("/api/todos", json={"description": "Todo 2"})
+    
+    todo1_id = resp1.json()["id"]
+    
+    # Delete first one
+    delete_resp = await client.delete(f"/api/todos/{todo1_id}")
+    assert delete_resp.status_code == 204
+    
+    # Verify count is 1
+    get_resp = await client.get("/api/todos")
+    assert len(get_resp.json()) == 1

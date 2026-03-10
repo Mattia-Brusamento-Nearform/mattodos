@@ -137,5 +137,46 @@ export function useTodos() {
     dispatch({ type: 'CLEAR_ERROR', payload: id ? { id } : undefined });
   }, []);
 
-  return { state, loadTodos, createTodo, clearError };
+  const toggleTodo = useCallback(
+    async (id: string) => {
+      const todo = state.todos.find((t) => t.id === id);
+      if (!todo) return;
+
+      const newCompleted = !todo.completed;
+      dispatch({ type: 'TOGGLE_TODO', payload: { id } });
+
+      try {
+        const result = await api.toggleTodo(id, newCompleted);
+        dispatch({ type: 'TOGGLE_TODO_SUCCESS', payload: result });
+      } catch {
+        dispatch({
+          type: 'TOGGLE_TODO_FAILURE',
+          payload: { id, error: "Couldn't update that — try again" },
+        });
+      }
+    },
+    [state.todos],
+  );
+
+  const deleteTodo = useCallback(
+    async (id: string) => {
+      const todo = state.todos.find((t) => t.id === id);
+      if (!todo) return;
+
+      dispatch({ type: 'DELETE_TODO', payload: { id } });
+
+      try {
+        await api.deleteTodo(id);
+        dispatch({ type: 'DELETE_TODO_SUCCESS', payload: { id } });
+      } catch {
+        dispatch({
+          type: 'DELETE_TODO_FAILURE',
+          payload: { id, todo, error: "Couldn't delete that — try again" },
+        });
+      }
+    },
+    [state.todos],
+  );
+
+  return { state, loadTodos, createTodo, clearError, toggleTodo, deleteTodo };
 }
