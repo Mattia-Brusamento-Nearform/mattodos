@@ -18,26 +18,7 @@ docker compose up
 - **Backend API**: http://localhost:8000 (internal) / http://localhost:8080 (docker-compose)
 - **Health Check**: http://localhost:8080/api/health
 
-## Project Status
-
-✅ **Epic 1**: Create and View Todos (5/5 stories complete)
-- Project scaffolding & infrastructure
-- Todo data model & API endpoints
-- Frontend shell & design system
-- Todo creation with optimistic UI
-- App states (loading, empty, error)
-
-✅ **Epic 2**: Complete, Delete, and Manage Todos (4/4 stories complete)
-- Toggle todo completion with optimistic UI
-- Delete todo with confirmation dialog
-- Inline error display and auto-dismiss
-- Todo limit enforcement (50 max)
-
-✅ **Epic 3**: Accessibility, Responsive Design, and Production Readiness (4/4 stories complete)
-- Responsive layout (mobile & desktop)
-- Full keyboard and screen reader accessibility
-- E2E tests and test coverage (13/13 tests passing)
-- Production Docker build, health check, and documentation
+![1773226130753](image/README/1773226130753.png)
 
 ## Development
 
