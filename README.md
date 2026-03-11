@@ -263,7 +263,3 @@ This project follows the BMAD (Breaking Making And Directing) methodology for de
 - Production-ready code quality
 
 See `_bmad-output/implementation-artifacts/` for detailed story documentation and completion reports.
-
-## License
-
-[Add your license here]
