@@ -1,6 +1,6 @@
 # Story 2.4: Todo Limit Enforcement
 
-status: review
+Status: done
 
 ## Story
 

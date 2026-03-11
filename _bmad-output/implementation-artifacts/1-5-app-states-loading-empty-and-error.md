@@ -1,6 +1,6 @@
 # Story 1.5: App States — Loading, Empty, and Error
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

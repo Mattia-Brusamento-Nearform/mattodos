@@ -1,6 +1,6 @@
 # Story 2.1: Toggle Todo Completion with Optimistic UI
 
-Status: review
+Status: done
 
 ## Story
 

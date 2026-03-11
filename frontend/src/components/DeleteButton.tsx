@@ -9,12 +9,12 @@ export function DeleteButton({ onDelete, todoDescription }: DeleteButtonProps) {
       type="button"
       onClick={onDelete}
       aria-label={`Delete '${todoDescription}'`}
-      className={`flex-shrink-0 w-7 h-7 flex items-center justify-center text-stone-400 hover:text-red-600 
+      className={`flex-shrink-0 flex items-center justify-center text-stone-400 hover:text-red-600 
         rounded-full hover:bg-red-50 transition-colors
         focus-visible:ring-2 focus-visible:ring-slate-600 focus-visible:ring-offset-2
         motion-safe:transition-opacity duration-150
-        opacity-0 group-hover:opacity-100 focus-visible:opacity-100
-        @media (hover: none) { opacity: 1 }`}
+        hover-hide focus-visible:opacity-100
+        min-h-[44px] min-w-[44px] -mr-2`}
     >
       <svg
         className="w-5 h-5"

@@ -1,6 +1,6 @@
 # Story 1.1: Project Scaffolding and Infrastructure
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

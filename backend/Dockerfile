@@ -14,4 +14,5 @@ RUN chmod +x entrypoint.sh
 RUN useradd -r -s /bin/false appuser
 USER appuser
 EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl -f http://localhost:8000/api/health || exit 1
 ENTRYPOINT ["./entrypoint.sh"]

@@ -10,7 +10,8 @@ describe('TodoCheckbox', () => {
     const button = screen.getByRole('checkbox');
     expect(button).toHaveAttribute('aria-checked', 'false');
     expect(container.querySelector('svg')).not.toBeInTheDocument();
-    expect(button).toHaveClass('border-stone-300');
+    const circle = container.querySelector('div.border-2');
+    expect(circle).toHaveClass('border-stone-300');
   });
 
   it('renders green filled circle with checkmark when checked=true', () => {
@@ -19,7 +20,8 @@ describe('TodoCheckbox', () => {
     );
     const button = screen.getByRole('checkbox');
     expect(button).toHaveAttribute('aria-checked', 'true');
-    expect(button).toHaveClass('bg-green-600');
+    const circle = container.querySelector('div.border-2');
+    expect(circle).toHaveClass('bg-green-600');
     expect(container.querySelector('svg')).toBeInTheDocument();
   });
 

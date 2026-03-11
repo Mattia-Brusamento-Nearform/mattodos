@@ -1,6 +1,6 @@
 # Story 1.3: Frontend Shell and Design System
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

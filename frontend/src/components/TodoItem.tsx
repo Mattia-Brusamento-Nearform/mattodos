@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import type { Todo } from '../types/todo';
 import { TodoCheckbox } from './TodoCheckbox';
 import { DeleteButton } from './DeleteButton';
@@ -12,20 +12,22 @@ type TodoItemProps = {
   onClearError?: (id: string) => void;
 };
 
-export function TodoItem({ todo, onToggle, onDelete, onClearError }: TodoItemProps) {
-  const [showConfirm, setShowConfirm] = useState(false);
-  const formattedDate = new Date(todo.createdAt).toLocaleDateString();
+export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
+  ({ todo, onToggle, onDelete, onClearError }, ref) => {
+    const [showConfirm, setShowConfirm] = useState(false);
+    const formattedDate = new Date(todo.createdAt).toLocaleDateString();
 
-  const handleConfirmDelete = () => {
-    setShowConfirm(false);
-    onDelete?.(todo.id);
-  };
+    const handleConfirmDelete = () => {
+      setShowConfirm(false);
+      onDelete?.(todo.id);
+    };
 
-  return (
-    <li
-      className={`group px-4 py-3 flex items-center gap-3 motion-safe:animate-fade-in
-                  ${todo.optimistic ? 'opacity-70' : ''}`}
-    >
+    return (
+      <li
+        ref={ref}
+        className={`group px-4 py-3 flex items-center gap-3 motion-safe:animate-fade-in
+                    ${todo.optimistic ? 'opacity-70' : ''}`}
+      >
       <TodoCheckbox
         checked={todo.completed}
         onToggle={() => onToggle?.(todo.id)}
@@ -37,7 +39,7 @@ export function TodoItem({ todo, onToggle, onDelete, onClearError }: TodoItemPro
         }`}>
           {todo.description}
         </p>
-        <time className="text-xs text-stone-400" dateTime={todo.createdAt}>
+        <time className="text-xs text-stone-500" dateTime={todo.createdAt}>
           {formattedDate}
         </time>
       </div>
@@ -59,4 +61,4 @@ export function TodoItem({ todo, onToggle, onDelete, onClearError }: TodoItemPro
       />
     </li>
   );
-}
+});

@@ -1,6 +1,6 @@
 # Story 1.2: Todo Data Model and API Endpoints
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

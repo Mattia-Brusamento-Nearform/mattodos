@@ -101,14 +101,14 @@ export function ConfirmDialog({
               <button
                 ref={cancelButtonRef}
                 onClick={onCancel}
-                className="px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors font-medium"
+                className="px-4 py-2 min-h-[44px] rounded-lg text-stone-600 hover:bg-stone-100 transition-colors font-medium focus-visible:ring-2 focus-visible:ring-slate-600 focus-visible:ring-offset-2"
               >
                 Cancel
               </button>
               <button
                 ref={confirmButtonRef}
                 onClick={onConfirm}
-                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors font-medium"
+                className="px-4 py-2 min-h-[44px] rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors font-medium focus-visible:ring-2 focus-visible:ring-slate-600 focus-visible:ring-offset-2"
               >
                 Delete
               </button>

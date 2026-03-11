@@ -1,6 +1,6 @@
 # Story 2.2: Delete Todo with Confirmation Dialog
 
-Status: review
+Status: done
 
 ## Story
 

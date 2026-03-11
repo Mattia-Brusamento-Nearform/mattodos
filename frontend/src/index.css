@@ -37,3 +37,22 @@
     transform: scale(1);
   }
 }
+
+/* Hover detection: apply progressive disclosure only on hover-capable devices */
+@media (hover: hover) {
+  .hover-hide {
+    opacity: 0;
+    transition: opacity 150ms;
+  }
+  
+  .group:hover .hover-hide {
+    opacity: 1;
+  }
+}
+
+/* On touch devices, always show hover-hide elements */
+@media (hover: none) {
+  .hover-hide {
+    opacity: 1;
+  }
+}

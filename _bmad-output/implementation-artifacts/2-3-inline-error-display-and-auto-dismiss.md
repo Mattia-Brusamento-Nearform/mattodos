@@ -1,6 +1,6 @@
 # Story 2.3: Inline Error Display and Auto-Dismiss
 
-Status: review
+Status: done
 
 ## Story
 

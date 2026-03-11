@@ -1,6 +1,6 @@
 # Story 1.4: Todo Creation with Optimistic UI
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

@@ -40,7 +40,7 @@ function ErrorState({
       <p className="text-stone-500 text-sm mb-4">{message}</p>
       <button
         onClick={onRetry}
-        className="px-4 py-2 bg-stone-900 text-white rounded-lg text-sm
+        className="px-4 py-2 min-h-[44px] bg-stone-900 text-white rounded-lg text-sm
                    hover:bg-stone-800 transition-colors focus:outline-none
                    focus:ring-2 focus:ring-stone-600 focus:ring-offset-2"
       >
